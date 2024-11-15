@@ -1,4 +1,4 @@
-package com.esiea.pootd2.models;
+package com.esiea.pootd2;
 
 import java.util.ArrayList;
 

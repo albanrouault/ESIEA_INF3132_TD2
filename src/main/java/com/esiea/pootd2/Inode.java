@@ -1,4 +1,4 @@
-package com.esiea.pootd2.models;
+package com.esiea.pootd2;
 
 public abstract class Inode {
     private String name;

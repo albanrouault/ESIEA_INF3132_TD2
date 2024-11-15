@@ -1,4 +1,4 @@
-package com.esiea.pootd2.models;
+package com.esiea.pootd2;
 
 public class FileInode extends Inode {
     private int size;
