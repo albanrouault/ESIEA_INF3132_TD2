@@ -3,7 +3,7 @@ package com.esiea.pootd2.models;
 import java.util.LinkedList;
 
 public class FolderInode extends Inode {
-    private LinkedList<Inode> children;
+    private final LinkedList<Inode> children;
 
     public FolderInode(String name) {
         super(name);

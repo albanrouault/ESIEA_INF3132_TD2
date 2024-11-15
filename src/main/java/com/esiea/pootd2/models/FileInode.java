@@ -5,6 +5,7 @@ public class FileInode extends Inode {
 
     public FileInode(String name) {
         super(name);
+
         // Nombre random entre 1 et 100000
         this.size = (int) (Math.random() * 100000) + 1;
     }
