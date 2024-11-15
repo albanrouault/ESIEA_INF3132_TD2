@@ -7,7 +7,8 @@ public class FolderInode extends Inode {
 
     public FolderInode(String name) {
         super(name);
-        children = new LinkedList<Inode>();
+
+        this.children = new LinkedList<>();
     }
 
     public void addInode(Inode child) {
@@ -18,10 +19,8 @@ public class FolderInode extends Inode {
     @Override
     public int getSize() {
         int size = 0;
-        if (children != null) {
-            for (Inode child : children) {
-                size += child.getSize();
-            }
+        for (Inode child : children) {
+            size += child.getSize();
         }
         return size;
     }
