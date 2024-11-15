@@ -10,7 +10,7 @@
     <name>ESIEA_INF3132_TD2</name>
 
     <properties>
-        <java.version>23</java.version>
+        <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.mainClass>com.esiea.pootd2.ExplorerApp</project.mainClass>
     </properties>
