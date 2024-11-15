@@ -1,13 +1,13 @@
 package com.esiea.pootd2.models;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class FolderInode extends Inode {
-    private ArrayList<Inode> children;
+    private LinkedList<Inode> children;
 
     public FolderInode(String name) {
         super(name);
-        children = new ArrayList<Inode>();
+        children = new LinkedList<Inode>();
     }
 
     public void addInode(Inode child) {
