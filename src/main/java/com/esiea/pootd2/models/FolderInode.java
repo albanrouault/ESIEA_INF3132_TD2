@@ -10,7 +10,7 @@ public class FolderInode extends Inode {
         children = new ArrayList<Inode>();
     }
 
-    public void addChild(Inode child) {
+    public void addInode(Inode child) {
         children.add(child);
         child.parent = this;
     }
