@@ -11,7 +11,7 @@ public class FolderInode extends Inode {
         this.children = new ArrayList<>();
     }
 
-    public void addChild(Inode child) {
+    public void addInode(Inode child) {
         children.add(child);
         child.parent = this;
     }
