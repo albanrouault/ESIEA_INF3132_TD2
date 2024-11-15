@@ -3,11 +3,12 @@ package com.esiea.pootd2.models;
 import java.util.ArrayList;
 
 public class FolderInode extends Inode {
-    private ArrayList<Inode> children;
+    private final ArrayList<Inode> children;
 
     public FolderInode(String name) {
         super(name);
-        children = new ArrayList<Inode>();
+
+        this.children = new ArrayList<>();
     }
 
     public void addChild(Inode child) {
