@@ -1,5 +1,6 @@
 package com.esiea.pootd2;
 
+import com.esiea.pootd2.interfaces.TextInterface;
 import com.esiea.pootd2.models.FileInode;
 import com.esiea.pootd2.models.FolderInode;
 
@@ -16,5 +17,8 @@ public class ExplorerApp {
         folder1.addInode(file1);
         folder2.addInode(file2);
         folder2.addInode(file3);
+
+        TextInterface textInterface = new TextInterface();
+        textInterface.run();
     }
 }
