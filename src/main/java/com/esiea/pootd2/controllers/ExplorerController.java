@@ -21,7 +21,8 @@ public class ExplorerController implements IExplorerController {
         } else if (command instanceof TouchCommand) {
             return doCommand((TouchCommand) command);
         } else {
-            return "";
+            ErrorCommand errorCommand = new ErrorCommand("Command not found");
+            return doCommand(errorCommand);
         }
     }
 
