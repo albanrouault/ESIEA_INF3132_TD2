@@ -18,20 +18,19 @@ public class ExplorerController implements IExplorerController {
 
         if (command == null) {
             return "";
-        } else if (command instanceof ChangeDirectoryCommand) {
-            return doCommand((ChangeDirectoryCommand) command);
-        } else if (command instanceof ErrorCommand) {
-            return doCommand((ErrorCommand) command);
-        } else if (command instanceof ListCommand) {
-            return doCommand((ListCommand) command);
-        } else if (command instanceof MakeDirectoryCommand) {
-            return doCommand((MakeDirectoryCommand) command);
-        } else if (command instanceof TouchCommand) {
-            return doCommand((TouchCommand) command);
-        } else {
-            ErrorCommand errorCommand = new ErrorCommand("Command not implemented");
-            return doCommand(errorCommand);
         }
+
+        return switch (command) {
+            case ChangeDirectoryCommand cdCommand -> doCommand(cdCommand);
+            case ListCommand listCommand -> doCommand(listCommand);
+            case MakeDirectoryCommand mkdirCommand -> doCommand(mkdirCommand);
+            case TouchCommand touchCommand -> doCommand(touchCommand);
+            case ErrorCommand errorCommand -> doCommand(errorCommand);
+            default -> {
+                ErrorCommand errorCmd = new ErrorCommand("Command not implemented");
+                yield doCommand(errorCmd);
+            }
+        };
     }
 
     /**
