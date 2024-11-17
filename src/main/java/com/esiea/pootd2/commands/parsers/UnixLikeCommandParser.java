@@ -45,6 +45,8 @@ public class UnixLikeCommandParser implements ICommandParser {
                     return new ErrorCommand("touch: Missing file name.");
                 }
                 return new TouchCommand(arguments.get(1));
+            case "":
+                return null;
             default:
                 return new ErrorCommand("Unknown command: " + commandName);
         }

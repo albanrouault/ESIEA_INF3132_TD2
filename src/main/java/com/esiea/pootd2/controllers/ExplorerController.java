@@ -16,7 +16,9 @@ public class ExplorerController implements IExplorerController {
         UnixLikeCommandParser parser = new UnixLikeCommandParser();
         Command command = parser.parse(commandStr);
 
-        if (command instanceof ChangeDirectoryCommand) {
+        if (command == null) {
+            return "";
+        } else if (command instanceof ChangeDirectoryCommand) {
             return doCommand((ChangeDirectoryCommand) command);
         } else if (command instanceof ErrorCommand) {
             return doCommand((ErrorCommand) command);
