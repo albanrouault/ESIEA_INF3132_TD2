@@ -1,13 +1,13 @@
 package com.esiea.pootd2.interfaces;
 
-import com.esiea.pootd2.controllers.ExplorerController;
 import java.util.Scanner;
 
-public class TextInterface implements IUserInterface {
-    private ExplorerController controller;
+import com.esiea.pootd2.controllers.IExplorerController;
 
-    public TextInterface(ExplorerController controller) {
-        this.controller = controller;
+public class TextInterface extends AbstractInterface {
+
+    public TextInterface(IExplorerController controller) {
+        super(controller);
     }
 
     @Override
