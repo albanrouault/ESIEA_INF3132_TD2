@@ -11,9 +11,17 @@ public class FolderInode extends Inode {
         this.childrens = new LinkedList<>();
     }
 
-    public void addInode(Inode child) {
+    public boolean addInode(Inode child) {
+        // Vérifier si l'enfant (nom + type) existe déjà
+        for (Inode existingChild : childrens) {
+            if (existingChild.getClass().equals(child.getClass()) && existingChild.getName().equals(child.getName())) {
+                return false;
+            }
+        }
+    
         childrens.add(child);
         child.parent = this;
+        return true;
     }
 
     /**

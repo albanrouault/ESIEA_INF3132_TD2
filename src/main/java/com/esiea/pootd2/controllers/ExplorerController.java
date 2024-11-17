@@ -86,8 +86,11 @@ public class ExplorerController implements IExplorerController {
     private String doCommand(MakeDirectoryCommand command) {
         // Create a new folder with the given name
         FolderInode newFolder = new FolderInode(command.getDirectoryName());
-        currentDirectory.addInode(newFolder);
-        return "";
+        if (currentDirectory.addInode(newFolder)) {
+            return "";
+        } else {
+            return this.doCommand(new ErrorCommand("Directory already exists"));
+        }
     }
 
     /**
@@ -99,7 +102,10 @@ public class ExplorerController implements IExplorerController {
     private String doCommand(TouchCommand command) {
         // Create a new file with the given name
         FileInode newFile = new FileInode(command.getFileName());
-        currentDirectory.addInode(newFile);
-        return "";
+        if (currentDirectory.addInode(newFile)) {
+            return "";
+        } else {
+            return this.doCommand(new ErrorCommand("File already exists"));
+        }
     }
 }
