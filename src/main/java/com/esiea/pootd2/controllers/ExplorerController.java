@@ -1,15 +1,22 @@
 package com.esiea.pootd2.controllers;
 
 import com.esiea.pootd2.commands.*;
-import com.esiea.pootd2.parsers.UnixLikeCommandParser;
+import com.esiea.pootd2.commands.parsers.UnixLikeCommandParser;
+import com.esiea.pootd2.models.FolderInode;
 
 public class ExplorerController implements IExplorerController {
+
+    private FolderInode currentDirectory;
+
+    public ExplorerController() {
+        this.currentDirectory = new FolderInode("/");
+    }
+
     @Override
     public String executeCommand(String commandStr) {
         UnixLikeCommandParser parser = new UnixLikeCommandParser();
         Command command = parser.parse(commandStr);
 
-        // Je suis pas sur qu'il faille faire ça, ça me parrait bien moche, je pense pas avoir compris la question (Etape 6) + il faut finir l'étape
         if (command instanceof ChangeDirectoryCommand) {
             return doCommand((ChangeDirectoryCommand) command);
         } else if (command instanceof ErrorCommand) {
@@ -21,28 +28,28 @@ public class ExplorerController implements IExplorerController {
         } else if (command instanceof TouchCommand) {
             return doCommand((TouchCommand) command);
         } else {
-            ErrorCommand errorCommand = new ErrorCommand("Command not found");
+            ErrorCommand errorCommand = new ErrorCommand("Command not implemented");
             return doCommand(errorCommand);
         }
     }
 
-    private String doCommand(ChangeDirectoryCommand commandStr) {
+    private String doCommand(ChangeDirectoryCommand command) {
         return "";
     }
 
-    private String doCommand(ErrorCommand commandStr) {
+    private String doCommand(ErrorCommand command) {
         return "";
     }
 
-    private String doCommand(ListCommand commandStr) {
+    private String doCommand(ListCommand command) {
         return "";
     }
 
-    private String doCommand(MakeDirectoryCommand commandStr) {
+    private String doCommand(MakeDirectoryCommand command) {
         return "";
     }
 
-    private String doCommand(TouchCommand commandStr) {
+    private String doCommand(TouchCommand command) {
         return "";
     }
 }
