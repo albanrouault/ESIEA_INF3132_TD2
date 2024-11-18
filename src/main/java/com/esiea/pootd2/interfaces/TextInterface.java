@@ -20,7 +20,13 @@ public class TextInterface extends AbstractInterface {
         while (true) {
             System.out.print("> ");
             input = scanner.nextLine();
-            System.out.println(controller.executeCommand(input));
+
+            // Si "exit" est entré, on arrête le programme
+            if (input.equals("exit")) {
+                System.exit(0);
+            }
+
+            System.out.print(controller.executeCommand(input));
         }
     }
 }
