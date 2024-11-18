@@ -2,7 +2,9 @@ package com.esiea.pootd2.controllers;
 
 import com.esiea.pootd2.commands.*;
 import com.esiea.pootd2.commands.parsers.UnixLikeCommandParser;
-import com.esiea.pootd2.models.*;
+import com.esiea.pootd2.models.FileInode;
+import com.esiea.pootd2.models.FolderInode;
+import com.esiea.pootd2.models.Inode;
 
 public class ExplorerController implements IExplorerController {
     private FolderInode currentDirectory;
@@ -20,24 +22,24 @@ public class ExplorerController implements IExplorerController {
             return "";
         }
 
-        if (command instanceof ChangeDirectoryCommand cdCommand) {
+        if (command instanceof ChangeDirectoryCommand cdCommand)
             return doCommand(cdCommand);
-        } else if (command instanceof ListCommand listCommand) {
+        if (command instanceof ListCommand listCommand)
             return doCommand(listCommand);
-        } else if (command instanceof MakeDirectoryCommand mkdirCommand) {
+        if (command instanceof MakeDirectoryCommand mkdirCommand)
             return doCommand(mkdirCommand);
-        } else if (command instanceof TouchCommand touchCommand) {
+        if (command instanceof TouchCommand touchCommand)
             return doCommand(touchCommand);
-        } else if (command instanceof ErrorCommand errorCommand) {
+        if (command instanceof ErrorCommand errorCommand)
             return doCommand(errorCommand);
-        } else {
-            ErrorCommand errorCmd = new ErrorCommand("Command not implemented");
-            return doCommand(errorCmd);
-        }
+
+        ErrorCommand errorCmd = new ErrorCommand("Command not implemented");
+        return doCommand(errorCmd);
     }
 
     /**
      * Change the current directory to the given path.
+     *
      * @param command The command to execute.
      * @return The result of the command.
      */
@@ -58,6 +60,7 @@ public class ExplorerController implements IExplorerController {
 
     /**
      * Handle the error command.
+     *
      * @param command The command to execute.
      * @return The result of the command.
      */
@@ -68,6 +71,7 @@ public class ExplorerController implements IExplorerController {
     /**
      * TODO : Voir si on peut rendre cette liste en RO avec une deep copy et si on doit pouvoir l'exec à distance, exemple ls /home/user
      * Handle the list command.
+     *
      * @param command The command to execute.
      * @return The result of the command.
      */
@@ -84,6 +88,7 @@ public class ExplorerController implements IExplorerController {
     /**
      * TODO : Voir si on doit pouvoir créer un dossier à "distance" -> actuellement on stock le nom, dans ce cas il faudrait stocker le path
      * Handle the make directory command.
+     *
      * @param command The command to execute.
      * @return The result of the command.
      */
@@ -100,6 +105,7 @@ public class ExplorerController implements IExplorerController {
     /**
      * TODO : Voir si on doit pouvoir créer un fichier à "distance" -> actuellement on stock le nom, dans ce cas il faudrait stocker le path
      * Handle the touch command.
+     *
      * @param command The command to execute.
      * @return The result of the command.
      */
