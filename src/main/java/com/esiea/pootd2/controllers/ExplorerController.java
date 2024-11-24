@@ -4,7 +4,6 @@ import com.esiea.pootd2.commands.*;
 import com.esiea.pootd2.commands.parsers.UnixLikeCommandParser;
 import com.esiea.pootd2.models.FileInode;
 import com.esiea.pootd2.models.FolderInode;
-import com.esiea.pootd2.models.Inode;
 
 /**
  * Controller for managing file system operations.
@@ -107,12 +106,12 @@ public class ExplorerController implements IExplorerController {
      * @return The result of the command execution.
      */
     private String doCommand(ListCommand command) {
-        // Loop through the children of the current folder and display their name and size
+        // Sort the children of the current folder by name and display their name and size
         // Format: name(tabulation)size\n
         StringBuilder result = new StringBuilder();
-        for (Inode child : currentDirectory.getChildrens()) {
-            result.append(child.getName()).append("\t").append(child.getSize()).append("\n");
-        }
+        currentDirectory.getChildrens().stream()
+            .sorted((child1, child2) -> child1.getName().compareToIgnoreCase(child2.getName()))
+            .forEach(child -> result.append(child.getName()).append("\t").append(child.getSize()).append("\n"));
         return result.toString();
     }
 
