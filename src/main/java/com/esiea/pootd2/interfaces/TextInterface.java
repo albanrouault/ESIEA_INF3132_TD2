@@ -4,24 +4,33 @@ import java.util.Scanner;
 
 import com.esiea.pootd2.controllers.IExplorerController;
 
+/**
+ * Text interface for the user.
+ */
 public class TextInterface extends AbstractInterface {
 
+    /**
+     * Constructs a TextInterface with the given controller.
+     *
+     * @param controller The controller to use.
+     */
     public TextInterface(IExplorerController controller) {
         super(controller);
     }
 
+    /**
+     * Runs the TextInterface.
+     */
     @Override
     public void run() {
-        // On crée un scanner pour lire les entrées de l'utilisateur
         Scanner scanner = new Scanner(System.in);
         String input;
 
-        // On boucle tant que l'utilisateur n'a pas entré 'exit'
+        // We loop until the user enters 'exit'
         while (true) {
             System.out.print("> ");
             input = scanner.nextLine();
 
-            // Si "exit" est entré, on arrête le programme
             if (input.equals("exit")) {
                 System.exit(0);
             }

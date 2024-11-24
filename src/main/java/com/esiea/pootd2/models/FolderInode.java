@@ -2,17 +2,31 @@ package com.esiea.pootd2.models;
 
 import java.util.LinkedList;
 
+/**
+ * FolderInode class representing a folder in the filesystem.
+ */
 public class FolderInode extends Inode {
     private final LinkedList<Inode> childrens;
 
+    /**
+     * Constructs a FolderInode with the given name.
+     *
+     * @param name The name of the folder.
+     */
     public FolderInode(String name) {
         super(name);
 
         this.childrens = new LinkedList<>();
     }
 
+    /**
+     * Adds an inode to the folder.
+     *
+     * @param child The inode to add.
+     * @return True if the inode was added, false if it already exists.
+     */
     public boolean addInode(Inode child) {
-        // Vérifier si l'enfant (nom + type) existe déjà
+        // Check if the child (name + type) already exists
         for (Inode existingChild : childrens) {
             if (existingChild.getClass().equals(child.getClass()) && existingChild.getName().equals(child.getName())) {
                 return false;
@@ -32,6 +46,11 @@ public class FolderInode extends Inode {
         return childrens;
     }
 
+    /**
+     * Gets the size of the folder.
+     *
+     * @return The size of the folder.
+     */
     @Override
     public int getSize() {
         int size = 0;
@@ -41,6 +60,12 @@ public class FolderInode extends Inode {
         return size;
     }
 
+    /**
+     * Gets the folder inode with the given name.
+     *
+     * @param name The name of the folder to get.
+     * @return The folder inode with the given name.
+     */
     public FolderInode getFolderInode(String name) {
         if (name.equals(".") || (name.equals("..") && this.getName().equals("/"))) {
             return this;

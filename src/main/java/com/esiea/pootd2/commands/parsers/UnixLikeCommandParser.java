@@ -5,7 +5,17 @@ import com.esiea.pootd2.commands.*;
 import java.util.List;
 import java.util.Arrays;
 
+/**
+ * Parser for Unix-like commands.
+ */
 public class UnixLikeCommandParser implements ICommandParser {
+
+    /**
+     * Parses a command string into a Command object.
+     *
+     * @param commandLine The command string to parse.
+     * @return The parsed Command object.
+     */
     @Override
     public Command parse(String commandLine) {
         try {
@@ -16,11 +26,22 @@ public class UnixLikeCommandParser implements ICommandParser {
         }
     }
 
+    /**
+     * Splits the commandLine by spaces, assuming basic space-separated commands.
+     *
+     * @param commandLine The command string to split.
+     * @return The list of arguments.
+     */
     private List<String> splitArguments(String commandLine) {
-        // Splits the commandLine by spaces, assuming basic space-separated commands
         return Arrays.asList(commandLine.trim().split("\\s+"));
     }
 
+    /**
+     * Maps the arguments to the corresponding Command object.
+     *
+     * @param arguments The list of arguments.
+     * @return The parsed Command object.
+     */
     private Command mapCommand(List<String> arguments) {
         if (arguments.isEmpty()) {
             return new ErrorCommand("No command provided.");
