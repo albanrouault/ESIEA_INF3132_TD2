@@ -6,7 +6,13 @@ import com.esiea.pootd2.interfaces.TextInterface;
 import com.esiea.pootd2.controllers.ExplorerController;
 import com.esiea.pootd2.controllers.IExplorerController;
 
+/**
+ * ExplorerApp class representing the main application.
+ */
 public class ExplorerApp {
+    /**
+     * Prints the help message.
+     */
     public static void printHelp() {
         System.out.println("""
         Usage: java ExplorerApp <interface_type>
@@ -15,6 +21,11 @@ public class ExplorerApp {
         """);
     }
 
+    /**
+     * Main method for the ExplorerApp.
+     *
+     * @param args The command-line arguments.
+     */
     public static void main(String[] args) {
         if (args.length != 1) {
             printHelp();

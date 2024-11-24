@@ -6,13 +6,25 @@ import com.esiea.pootd2.models.FileInode;
 import com.esiea.pootd2.models.FolderInode;
 import com.esiea.pootd2.models.Inode;
 
+/**
+ * Controller for managing file system operations.
+ */
 public class ExplorerController implements IExplorerController {
     private FolderInode currentDirectory;
 
+    /**
+     * Initializes the ExplorerController with the root directory.
+     */
     public ExplorerController() {
         this.currentDirectory = new FolderInode("/");
     }
 
+    /**
+     * Executes a given command string.
+     *
+     * @param commandStr The command string to execute.
+     * @return The result of the command execution.
+     */
     @Override
     public String executeCommand(String commandStr) {
         UnixLikeCommandParser parser = new UnixLikeCommandParser();
@@ -38,10 +50,10 @@ public class ExplorerController implements IExplorerController {
     }
 
     /**
-     * Change the current directory to the given path.
+     * Changes the current directory to the specified path.
      *
-     * @param command The command to execute.
-     * @return The result of the command.
+     * @param command The change directory command to execute.
+     * @return The result of the command execution.
      */
     private String doCommand(ChangeDirectoryCommand command) {
         // Split the path into parts
@@ -59,25 +71,24 @@ public class ExplorerController implements IExplorerController {
     }
 
     /**
-     * Handle the error command.
+     * Handles the error command.
      *
-     * @param command The command to execute.
-     * @return The result of the command.
+     * @param command The error command to execute.
+     * @return The result of the command execution.
      */
     private String doCommand(ErrorCommand command) {
         return command.getMessage() + "\n";
     }
 
     /**
-     * TODO : Voir si on peut rendre cette liste en RO avec une deep copy et si on doit pouvoir l'exec à distance, exemple ls /home/user
-     * Handle the list command.
+     * Handles the list command.
      *
-     * @param command The command to execute.
-     * @return The result of the command.
+     * @param command The list command to execute.
+     * @return The result of the command execution.
      */
     private String doCommand(ListCommand command) {
         // Loop through the children of the current folder and display their name and size
-        // Format : name(tabulation)size\n
+        // Format: name(tabulation)size\n
         StringBuilder result = new StringBuilder();
         for (Inode child : currentDirectory.getChildrens()) {
             result.append(child.getName()).append("\t").append(child.getSize()).append("\n");
@@ -86,11 +97,10 @@ public class ExplorerController implements IExplorerController {
     }
 
     /**
-     * TODO : Voir si on doit pouvoir créer un dossier à "distance" -> actuellement on stock le nom, dans ce cas il faudrait stocker le path
-     * Handle the make directory command.
+     * Handles the make directory command.
      *
-     * @param command The command to execute.
-     * @return The result of the command.
+     * @param command The make directory command to execute.
+     * @return The result of the command execution.
      */
     private String doCommand(MakeDirectoryCommand command) {
         // Create a new folder with the given name
@@ -103,11 +113,10 @@ public class ExplorerController implements IExplorerController {
     }
 
     /**
-     * TODO : Voir si on doit pouvoir créer un fichier à "distance" -> actuellement on stock le nom, dans ce cas il faudrait stocker le path
-     * Handle the touch command.
+     * Handles the touch command.
      *
-     * @param command The command to execute.
-     * @return The result of the command.
+     * @param command The touch command to execute.
+     * @return The result of the command execution.
      */
     private String doCommand(TouchCommand command) {
         // Create a new file with the given name
