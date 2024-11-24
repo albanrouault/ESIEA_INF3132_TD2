@@ -93,9 +93,29 @@ public class ExplorerController implements IExplorerController {
      * @return The result of the command.
      */
     private String doCommand(MakeDirectoryCommand command) {
-        // Create a new folder with the given name
-        FolderInode newFolder = new FolderInode(command.getDirectoryName());
-        if (currentDirectory.addInode(newFolder)) {
+        // Split the path into parts
+        String[] pathParts = command.getDirectoryPath().split("/");
+        // Loop through the path parts to navigate to the desired folder
+        FolderInode currentFolder = currentDirectory;
+        boolean created = false;
+        for (String pathPart : pathParts) {
+            // Check if the folder already exists
+            FolderInode folder = currentFolder.getFolderInode(pathPart);
+            if (folder == null) {
+                // Create a new folder with the given name
+                FolderInode newFolder = new FolderInode(pathPart);
+                if (currentFolder.addInode(newFolder)) {
+                    created = true;
+                    currentFolder = newFolder;
+                } else {
+                    return this.doCommand(new ErrorCommand("Directory already exists"));
+                }
+            } else {
+                currentFolder = folder;
+            }
+        }
+        // Check if the folder was created
+        if (created) {
             return "";
         } else {
             return this.doCommand(new ErrorCommand("Directory already exists"));
