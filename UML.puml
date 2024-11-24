@@ -1,0 +1,138 @@
+@startuml
+class com.esiea.pootd2.models.FileInode {
+- int size
++ <<Create>> FileInode(String)
++ int getSize()
+}
+
+
+class com.esiea.pootd2.commands.ChangeDirectoryCommand {
+- String path
++ <<Create>> ChangeDirectoryCommand(String)
++ String getPath()
+}
+
+
+class com.esiea.pootd2.commands.ListCommand {
+}
+interface com.esiea.pootd2.controllers.IExplorerController {
++ String executeCommand(String)
++ String getCurrentDirectory()
+}
+
+abstract class com.esiea.pootd2.models.Inode {
+- String name
+# FolderInode parent
++ <<Create>> Inode(String)
++ String getName()
++ FolderInode getParent()
++ {abstract}int getSize()
+}
+
+
+abstract class com.esiea.pootd2.commands.Command {
+}
+class com.esiea.pootd2.ExplorerApp {
++ {static} void printHelp()
++ {static} void main(String[])
+}
+
+abstract class com.esiea.pootd2.interfaces.AbstractInterface {
+# IExplorerController controller
++ <<Create>> AbstractInterface(IExplorerController)
+}
+
+
+class com.esiea.pootd2.commands.TouchCommand {
+- String fileName
++ <<Create>> TouchCommand(String)
++ String getFileName()
+}
+
+
+class com.esiea.pootd2.interfaces.HttpInterface {
+- HttpServer server
+- ExecutorService threadPool
+- boolean serverShouldClose
++ <<Create>> HttpInterface(IExplorerController)
++ void run()
++ void handle(HttpExchange)
+- void handleGetDefault(HttpExchange)
+- void handlePostExecute(HttpExchange)
+- void handleError(HttpExchange)
+- String constructWebPage()
+}
+
+
+class com.esiea.pootd2.commands.ErrorCommand {
+- String message
++ <<Create>> ErrorCommand(String)
++ String getMessage()
+}
+
+
+class com.esiea.pootd2.controllers.ExplorerController {
+- FolderInode currentDirectory
++ <<Create>> ExplorerController()
++ String executeCommand(String)
++ String getCurrentDirectory()
+- String doCommand(ChangeDirectoryCommand)
+- String doCommand(ErrorCommand)
+- String doCommand(ListCommand)
+- String doCommand(MakeDirectoryCommand)
+- String doCommand(TouchCommand)
+}
+
+
+class com.esiea.pootd2.models.FolderInode {
+- LinkedList<Inode> childrens
++ <<Create>> FolderInode(String)
++ boolean addInode(Inode)
++ LinkedList<Inode> getChildrens()
++ int getSize()
++ FolderInode getFolderInode(String)
+}
+
+
+class com.esiea.pootd2.commands.MakeDirectoryCommand {
+- String directoryPath
++ <<Create>> MakeDirectoryCommand(String)
++ String getDirectoryPath()
+}
+
+
+interface com.esiea.pootd2.commands.parsers.ICommandParser {
+~ {abstract}Command parse(String)
+}
+
+class com.esiea.pootd2.interfaces.TextInterface {
++ <<Create>> TextInterface(IExplorerController)
++ void run()
+}
+
+class com.esiea.pootd2.commands.parsers.UnixLikeCommandParser {
++ Command parse(String)
+- List<String> splitArguments(String)
+- Command mapCommand(List<String>)
+}
+
+interface com.esiea.pootd2.interfaces.IUserInterface {
++ void run()
+}
+
+
+
+com.esiea.pootd2.models.Inode <|-- com.esiea.pootd2.models.FileInode
+com.esiea.pootd2.commands.Command <|-- com.esiea.pootd2.commands.ChangeDirectoryCommand
+com.esiea.pootd2.commands.Command <|-- com.esiea.pootd2.commands.ListCommand
+com.esiea.pootd2.interfaces.IUserInterface <|.. com.esiea.pootd2.interfaces.AbstractInterface
+com.esiea.pootd2.commands.Command <|-- com.esiea.pootd2.commands.TouchCommand
+com.sun.net.httpserver.HttpHandler <|.. com.esiea.pootd2.interfaces.HttpInterface
+com.esiea.pootd2.interfaces.AbstractInterface <|-- com.esiea.pootd2.interfaces.HttpInterface
+com.esiea.pootd2.commands.Command <|-- com.esiea.pootd2.commands.ErrorCommand
+com.esiea.pootd2.controllers.IExplorerController <|.. com.esiea.pootd2.controllers.ExplorerController
+com.esiea.pootd2.models.Inode <|-- com.esiea.pootd2.models.FolderInode
+com.esiea.pootd2.commands.Command <|-- com.esiea.pootd2.commands.MakeDirectoryCommand
+com.esiea.pootd2.interfaces.AbstractInterface <|-- com.esiea.pootd2.interfaces.TextInterface
+com.esiea.pootd2.commands.parsers.ICommandParser <|.. com.esiea.pootd2.commands.parsers.UnixLikeCommandParser
+@enduml
