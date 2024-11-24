@@ -50,6 +50,26 @@ public class ExplorerController implements IExplorerController {
     }
 
     /**
+     * Gets the current directory.
+     *
+     * @return The current directory.
+     */
+    @Override
+    public String getCurrentDirectory() {
+        // Get the full path of the current directory (from current to root)
+        FolderInode currentFolder = currentDirectory;
+        StringBuilder result = new StringBuilder(currentFolder.getName());
+        // Loop through the parent folders to get the full path
+        while (currentFolder.getParent() != null) {
+            currentFolder = currentFolder.getParent();
+            result.insert(0, currentFolder.getName() + "/");
+        }
+        // Remove the first '/' character because the root folder is named '/'
+        result.deleteCharAt(0);
+        return result.toString();
+    }
+
+    /**
      * Changes the current directory to the specified path.
      *
      * @param command The change directory command to execute.

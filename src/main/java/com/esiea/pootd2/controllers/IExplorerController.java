@@ -11,4 +11,11 @@ public interface IExplorerController {
      * @return The result of the command execution.
      */
     public String executeCommand(String commandStr);
+
+    /**
+     * Returns the current directory.
+     *
+     * @return The current directory.
+     */
+    public String getCurrentDirectory();
 }

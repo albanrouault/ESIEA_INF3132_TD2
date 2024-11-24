@@ -28,7 +28,7 @@ public class TextInterface extends AbstractInterface {
 
         // We loop until the user enters 'exit'
         while (true) {
-            System.out.print("> ");
+            System.out.print(this.controller.getCurrentDirectory() + "> ");
             input = scanner.nextLine();
 
             if (input.equals("exit")) {
