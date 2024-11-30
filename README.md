@@ -5,8 +5,6 @@
 - **Vaizand Victor**
 - **Rouault Alban**
 
----
-
 ## Description
 
 Ce projet, réalisé dans le cadre du cours INF3132 (Programmation Orientée Objet - S5), est un explorateur de fichiers virtuel qui simule la navigation et la gestion d'un système de fichiers Unix-like. Il met en œuvre des concepts avancés de POO pour construire un système modulaire et extensible.
@@ -19,8 +17,6 @@ L'application supporte les commandes suivantes :
 - `exit` : Quitte l'application.
 
 L'utilisateur peut interagir avec l'application via une interface texte ou une interface HTTP.
-
----
 
 ## Fonctionnalités
 
@@ -49,14 +45,10 @@ En plus des exigences de base, nous avons ajouté les fonctionnalités suivantes
 5. **Affichage du chemin absolu actuel** :
    - Affichage du chemin absolu actuel dans l'interface de la console (pas présent sur l'interface web).
 
----
-
 ## UML
 ![Diagramme UML](UML.svg)
 
 Le diagramme UML ci-dessus illustre la structure et les interactions entre les différentes classes du projet.
-
----
 
 ## Installation
 
@@ -81,8 +73,6 @@ Le diagramme UML ci-dessus illustre la structure et les interactions entre les d
       java -cp ef com.esiea.pootd2.ExplorerApp http
       ```
 
----
-
 ## Utilisation
 
 ### Exemple d'interactions :
@@ -98,17 +88,14 @@ docs	12543
 /> exit
 ```
 
----
-
 ## Structure du projet
 
 - **`com.esiea.pootd2`** : Package principal contenant le point d'entrée `ExplorerApp`.
 - **`controllers`** : Contrôleurs gérant les interactions avec le système de fichiers.
 - **`models`** : Représentation des fichiers et dossiers avec les classes `Inode`, `FileInode` et `FolderInode`.
 - **`commands`** : Commandes disponibles (`ls`, `mkdir`, `cd`, `touch`).
+- **`parsers`** : Parsing des commandes utilisateur (`UnixLikeCommandParser`).
 - **`interfaces`** : Interfaces utilisateur (`TextInterface`, `HttpInterface`).
-
----
 
 ## Licence
 Ce projet est sous licence [GNU General Public License v3.0](LICENSE).
