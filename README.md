@@ -55,22 +55,22 @@ Le diagramme UML ci-dessus illustre la structure et les interactions entre les d
 1. **Cloner le dépôt :**
    ```bash
    git clone https://github.com/albanrouault/ESIEA_INF3132_TD2
-   cd ESIEA_INF3132_TD2
+   cd ESIEA_INF3132_TD2/src/main/java
    ```
 
 2. **Compiler le projet :**
    ```bash
-   javac -d ef $(find src -name "*.java")
+   javac com/esiea/pootd2/ExplorerApp.java
    ```
 
 3. **Exécuter l'application :**
     - Mode texte :
       ```bash
-      java -cp ef com.esiea.pootd2.ExplorerApp text
+      java -cp . com.esiea.pootd2.ExplorerApp text
       ```
     - Mode HTTP :
       ```bash
-      java -cp ef com.esiea.pootd2.ExplorerApp http
+      java -cp . com.esiea.pootd2.ExplorerApp http
       ```
 
 ## Utilisation
